@@ -1,0 +1,19 @@
+[Unit]
+Description=Zabbix Mattermost Hook
+Documentation=https://github.com/sebidude/zabbix-mattermost-hook
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+EnvironmentFile=/etc/sysconfig/zabbix-mattermost-hook.env
+User=zabbix
+Group=zabbix
+Type=simple
+Restart=on-failure
+ExecStart=/usr/bin/zabbix-mattermost-hook \
+LimitNOFILE=10000
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target
+
