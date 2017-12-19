@@ -37,6 +37,7 @@ func main() {
 	pass := os.Getenv("ZABBIX_PASS")
 	apiUrl := os.Getenv("ZABBIX_API")
 	chatUrl := os.Getenv("ZABBIX_CHATURL")
+	iconUrl := os.Getenv("ZABBIX_ICON_URL")
 	hg_env := os.Getenv("ZABBIX_HOSTGROUPS")
 	interval_str := os.Getenv("ZABBIX_INTERVAL")
 	problemIcon := os.Getenv("ZABBIX_PROBLEM_ICON")
@@ -114,6 +115,7 @@ func main() {
 			}
 
 		}
+		log.Println(problemTriggers)
 
 		for i, rcount, rlen := 0, 0, len(problemTriggers); i < rlen; i++ {
 			j := i - rcount
@@ -146,7 +148,7 @@ func main() {
 			log.Println(msg)
 			msgPayload = fmt.Sprintf("%s%s\n", msgPayload, msg)
 		}
-		payload := fmt.Sprintf("{\"username\":\"Zabbix\",\"text\":\"%s\"}", msgPayload)
+		payload := fmt.Sprintf("{\"icon_url\":\"%s\",\"username\":\"Zabbix\",\"text\":\"%s\"}", iconUrl, msgPayload)
 		form := url.Values{}
 		form.Add("payload", payload)
 		req, _ := http.NewRequest("POST", chatUrl, strings.NewReader(form.Encode()))
