@@ -2,6 +2,7 @@
 Yes, it is true, some people are using zabbix and mattermost.
 Here is a dirty go app that loads firing triggers for a list of hostgroups and
 sends out a notification via a mattermost webhook.
+This is a true type cast battle. Feel free to contribute, or have better some tea instead. :D
 
 ```
 export ZABBIX_USER=test
